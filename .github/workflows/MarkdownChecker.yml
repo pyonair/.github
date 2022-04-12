@@ -5,8 +5,8 @@ on:
 
 jobs:
   markdown-link-check:
-    #runs-on: ubuntu-20.04
-    runs-on: [self-hosted, linux, x64,L2]
+    runs-on: ubuntu-20.04
+    #runs-on: [self-hosted, linux, x64,L2]
     container:
       image: ghcr.io/setap2021/setapdocker   # Beware of versioning here GITHUB -- Some kind of magic here
       env:
@@ -20,8 +20,8 @@ jobs:
         max-depth: 1
 
   markdownlint-cli:
-    #runs-on: ubuntu-20.04
-    runs-on: [self-hosted, linux, x64,L2]
+    runs-on: ubuntu-20.04
+    #runs-on: [self-hosted, linux, x64,L2]
     container:
       image: ghcr.io/setap2021/setapdocker   # Beware of versioning here GITHUB -- Some kind of magic here
       env:
