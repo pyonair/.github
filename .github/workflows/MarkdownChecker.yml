@@ -1,0 +1,36 @@
+name: MarkdownChecker
+
+on:
+  workflow_call: #https://docs.github.com/en/actions/learn-github-actions/reusing-workflows#creating-a-reusable-workflow
+
+jobs:
+  markdown-link-check:
+    #runs-on: ubuntu-20.04
+    runs-on: [self-hosted, linux, x64,L2]
+    container:
+      image: ghcr.io/setap2021/setapdocker   # Beware of versioning here GITHUB -- Some kind of magic here
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@master
+    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        config-file: ".Ossonts/mlc.json"
+        folder-path: "."
+        max-depth: 1
+
+  markdownlint-cli:
+    #runs-on: ubuntu-20.04
+    runs-on: [self-hosted, linux, x64,L2]
+    container:
+      image: ghcr.io/setap2021/setapdocker   # Beware of versioning here GITHUB -- Some kind of magic here
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@master
+    - name: markdownlint-cli
+      uses: nosborn/github-action-markdown-cli@v2
+      with:
+        files: "./*.md" #Just ROOT markdown files
+        ignore_files: "README.md" #Ignore me
+        config_file: ".markdownlint.yaml"
